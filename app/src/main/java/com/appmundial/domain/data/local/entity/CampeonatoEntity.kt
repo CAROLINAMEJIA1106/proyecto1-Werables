@@ -3,7 +3,16 @@ package com.appmundial.domain.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
+/**
+ * Entidad que representa la tabla 'campeonato' en la base de datos.
+ *
+ * Contiene la información de cada campeonato ganado por un país, incluyendo:
+ * - Año del campeonato
+ * - Relación con el país ganador (clave foránea)
+ * - Información del goleador (nombre, país, número de goles, imagen)
+ *
+ * Esta entidad permite relacionar los países con sus campeonatos ganados.
+ */
 @Entity(tableName = "campeonato")
 data class CampeonatoEntity (
     @PrimaryKey(autoGenerate = true)

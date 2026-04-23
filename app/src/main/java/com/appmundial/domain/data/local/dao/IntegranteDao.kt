@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.appmundial.domain.data.local.entity.IntegranteEntity
 
+/*Interface Dao de la tabla integrante*/
 @Dao
 interface IntegranteDao {
 

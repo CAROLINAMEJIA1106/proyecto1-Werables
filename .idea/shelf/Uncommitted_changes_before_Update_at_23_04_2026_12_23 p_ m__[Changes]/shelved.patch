@@ -1,0 +1,196 @@
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"CHOOSE_PER_TEST\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 52d6ece22c6fb400fc2d3aefc2f30712a635d789)
++++ b/.idea/gradle.xml	(date 1776916815286)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+Index: app/src/main/java/com/appmundial/domain/data/local/entity/CampeonatoEntity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.appmundial.domain.data.local.entity\r\n\r\nimport androidx.room.Entity\r\nimport androidx.room.PrimaryKey\r\n\r\n\r\n@Entity(tableName = \"campeonato\")\r\ndata class CampeonatoEntity (\r\n    @PrimaryKey(autoGenerate = true)\r\n    val ca_id: Int,\r\n\r\n    val ca_pa_id: Int,   // FK → pais_ganador\r\n\r\n    val ca_anio: Int,\r\n\r\n    val ca_goleador: String?,\r\n\r\n    val ca_gole_pais: String?,\r\n\r\n    val ca_gole_num_gol: Int?,\r\n\r\n    val ca_gole_img: String?\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/appmundial/domain/data/local/entity/CampeonatoEntity.kt b/app/src/main/java/com/appmundial/domain/data/local/entity/CampeonatoEntity.kt
+--- a/app/src/main/java/com/appmundial/domain/data/local/entity/CampeonatoEntity.kt	(revision 52d6ece22c6fb400fc2d3aefc2f30712a635d789)
++++ b/app/src/main/java/com/appmundial/domain/data/local/entity/CampeonatoEntity.kt	(date 1776960294547)
+@@ -3,7 +3,16 @@
+ import androidx.room.Entity
+ import androidx.room.PrimaryKey
+ 
+-
++/**
++ * Entidad que representa la tabla 'campeonato' en la base de datos.
++ *
++ * Contiene la información de cada campeonato ganado por un país, incluyendo:
++ * - Año del campeonato
++ * - Relación con el país ganador (clave foránea)
++ * - Información del goleador (nombre, país, número de goles, imagen)
++ *
++ * Esta entidad permite relacionar los países con sus campeonatos ganados.
++ */
+ @Entity(tableName = "campeonato")
+ data class CampeonatoEntity (
+     @PrimaryKey(autoGenerate = true)
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"9.1.0\"\r\ncoreKtx = \"1.18.0\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.3.0\"\r\nespressoCore = \"3.7.0\"\r\nlifecycleRuntimeKtx = \"2.10.0\"\r\nactivityCompose = \"1.13.0\"\r\nkotlin = \"2.2.10\"\r\ncomposeBom = \"2024.09.00\"\r\n\r\nnav3Core = \"1.0.1\"\r\nruntime = \"1.10.5\"\r\nmaterial3 = \"1.4.0\"\r\nkotlinSerialization = \"2.2.21\"\r\nkotlinxSerializationCore = \"1.9.0\"\r\n\r\nksp = \"2.3.6\"\r\nroom = \"2.8.4\"\r\nlifecycle = \"2.8.7\"\r\n\r\n\r\n[libraries]\r\nandroidx-core-ktx = { group = \"androidx.core\", name = \"core-ktx\", version.ref = \"coreKtx\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\nandroidx-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nandroidx-espresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nandroidx-lifecycle-runtime-ktx = { group = \"androidx.lifecycle\", name = \"lifecycle-runtime-ktx\", version.ref = \"lifecycleRuntimeKtx\" }\r\nandroidx-activity-compose = { group = \"androidx.activity\", name = \"activity-compose\", version.ref = \"activityCompose\" }\r\nandroidx-compose-bom = { group = \"androidx.compose\", name = \"compose-bom\", version.ref = \"composeBom\" }\r\nandroidx-compose-ui = { group = \"androidx.compose.ui\", name = \"ui\" }\r\nandroidx-compose-ui-graphics = { group = \"androidx.compose.ui\", name = \"ui-graphics\" }\r\nandroidx-compose-ui-tooling = { group = \"androidx.compose.ui\", name = \"ui-tooling\" }\r\nandroidx-compose-ui-tooling-preview = { group = \"androidx.compose.ui\", name = \"ui-tooling-preview\" }\r\nandroidx-compose-ui-test-manifest = { group = \"androidx.compose.ui\", name = \"ui-test-manifest\" }\r\nandroidx-compose-ui-test-junit4 = { group = \"androidx.compose.ui\", name = \"ui-test-junit4\" }\r\nandroidx-compose-material3 = { group = \"androidx.compose.material3\", name = \"material3\" }\r\n\r\n# Core Navigation 3 libraries\r\nandroidx-navigation3-runtime = { module = \"androidx.navigation3:navigation3-runtime\", version.ref = \"nav3Core\" }\r\nandroidx-navigation3-ui = { module = \"androidx.navigation3:navigation3-ui\", version.ref = \"nav3Core\" }\r\nandroidx-compose-runtime = { group = \"androidx.compose.runtime\", name = \"runtime\", version.ref = \"runtime\" }\r\nandroidx-material3 = { group = \"androidx.compose.material3\", name = \"material3\", version.ref = \"material3\" }\r\nkotlinx-serialization-core = { module = \"org.jetbrains.kotlinx:kotlinx-serialization-core\", version.ref = \"kotlinxSerializationCore\" }\r\n\r\n#Room versions\r\nandroidx-room-runtime = { module = \"androidx.room:room-runtime\", version.ref = \"room\" }\r\nandroidx-room-ktx = { module = \"androidx.room:room-ktx\", version.ref = \"room\" }\r\nandroidx-room-compiler = { module = \"androidx.room:room-compiler\", version.ref = \"room\" }\r\nandroidx-lifecycle-viewmodel-compose = { module = \"androidx.lifecycle:lifecycle-viewmodel-compose\", version.ref = \"lifecycle\" }\r\n\r\n[plugins]\r\nandroid-application = { id = \"com.android.application\", version.ref = \"agp\" }\r\nkotlin-compose = { id = \"org.jetbrains.kotlin.plugin.compose\", version.ref = \"kotlin\" }\r\n\r\njetbrains-kotlin-serialization = { id = \"org.jetbrains.kotlin.plugin.serialization\", version.ref = \"kotlinSerialization\"}\r\n\r\nksp = { id = \"com.google.devtools.ksp\", version.ref = \"ksp\" }
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	(revision 52d6ece22c6fb400fc2d3aefc2f30712a635d789)
++++ b/gradle/libs.versions.toml	(date 1776961613057)
+@@ -18,6 +18,7 @@
+ ksp = "2.3.6"
+ room = "2.8.4"
+ lifecycle = "2.8.7"
++runtimeVersion = "1.11.0"
+ 
+ 
+ [libraries]
+@@ -48,6 +49,7 @@
+ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+ androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
++androidx-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtimeVersion" }
+ 
+ [plugins]
+ android-application = { id = "com.android.application", version.ref = "agp" }
+Index: app/src/main/java/com/appmundial/domain/data/local/entity/PaisGanadorEntity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.appmundial.domain.data.local.entity\r\n\r\nimport androidx.room.Entity\r\nimport androidx.room.PrimaryKey\r\n\r\n\r\n@Entity(tableName = \"pais_ganador\")\r\ndata class PaisGanadorEntity (\r\n    @PrimaryKey(autoGenerate = true)\r\n    val pa_id: Int,\r\n\r\n    val pa_nombre: String,\r\n\r\n    val pa_num_campeon: Int,\r\n\r\n    val pa_bandera: ByteArray?,   // BLOB\r\n\r\n    val pa_anios: String\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/appmundial/domain/data/local/entity/PaisGanadorEntity.kt b/app/src/main/java/com/appmundial/domain/data/local/entity/PaisGanadorEntity.kt
+--- a/app/src/main/java/com/appmundial/domain/data/local/entity/PaisGanadorEntity.kt	(revision 52d6ece22c6fb400fc2d3aefc2f30712a635d789)
++++ b/app/src/main/java/com/appmundial/domain/data/local/entity/PaisGanadorEntity.kt	(date 1776958682498)
+@@ -4,6 +4,16 @@
+ import androidx.room.PrimaryKey
+ 
+ 
++/**
++ * Entidad que representa la tabla 'pais_ganador' en la base de datos SQLite.
++ *
++ * Esta clase almacena la información de los países que han ganado la copa mundial,
++ * incluyendo su identificador, nombre, número de campeonatos ganados, bandera (imagen en formato BLOB)
++ * y los años en los que ha sido campeón.
++ *
++ * Es utilizada por Room para mapear los datos de la base de datos a objetos Kotlin.
++ */
++
+ @Entity(tableName = "pais_ganador")
+ data class PaisGanadorEntity (
+     @PrimaryKey(autoGenerate = true)
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" default=\"true\" project-jdk-name=\"jbr-21\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 52d6ece22c6fb400fc2d3aefc2f30712a635d789)
++++ b/.idea/misc.xml	(date 1776964196244)
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
+Index: app/src/main/java/com/appmundial/domain/data/local/entity/IntegranteEntity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.appmundial.domain.data.local.entity\r\n\r\nimport androidx.room.Entity\r\nimport androidx.room.PrimaryKey\r\n\r\n\r\n@Entity(tableName = \"integrante\")\r\ndata class IntegranteEntity (\r\n    @PrimaryKey(autoGenerate = true)\r\n    val int_id: Int,\r\n\r\n    val int_ca_id: Int,   // FK → campeonato\r\n\r\n    val int_nombre: String,\r\n\r\n    val int_es_jug: Int   // 1 = jugador\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/appmundial/domain/data/local/entity/IntegranteEntity.kt b/app/src/main/java/com/appmundial/domain/data/local/entity/IntegranteEntity.kt
+--- a/app/src/main/java/com/appmundial/domain/data/local/entity/IntegranteEntity.kt	(revision 52d6ece22c6fb400fc2d3aefc2f30712a635d789)
++++ b/app/src/main/java/com/appmundial/domain/data/local/entity/IntegranteEntity.kt	(date 1776960337920)
+@@ -3,7 +3,16 @@
+ import androidx.room.Entity
+ import androidx.room.PrimaryKey
+ 
+-
++/**
++ * Entidad que representa la tabla 'integrante' en la base de datos.
++ *
++ * Contiene la información de los integrantes de un equipo campeón en un campeonato específico,
++ * incluyendo jugadores y otros miembros asociados.
++ *
++ * El campo 'int_es_jug' permite identificar si el integrante es jugador (1) u otro tipo.
++ *
++ * Está relacionada con la tabla 'campeonato' mediante una clave foránea.
++ */
+ @Entity(tableName = "integrante")
+ data class IntegranteEntity (
+     @PrimaryKey(autoGenerate = true)
+Index: app/src/main/java/com/appmundial/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.appmundial\r\n\r\nimport android.os.Bundle\r\nimport androidx.activity.ComponentActivity\r\nimport androidx.activity.compose.setContent\r\nimport androidx.activity.enableEdgeToEdge\r\nimport androidx.compose.foundation.layout.fillMaxSize\r\nimport androidx.compose.foundation.layout.padding\r\nimport androidx.compose.material3.Scaffold\r\nimport androidx.compose.material3.Text\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.tooling.preview.Preview\r\nimport com.appmundial.ui.theme.AppMundialTheme\r\n\r\nclass MainActivity : ComponentActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        enableEdgeToEdge()\r\n        setContent {\r\n            AppMundialTheme {\r\n                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->\r\n                    Greeting(\r\n                        name = \"Android\",\r\n                        modifier = Modifier.padding(innerPadding)\r\n                    )\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n@Composable\r\nfun Greeting(name: String, modifier: Modifier = Modifier) {\r\n    Text(\r\n        text = \"Hello $name!\",\r\n        modifier = modifier\r\n    )\r\n}\r\n\r\n@Preview(showBackground = true)\r\n@Composable\r\nfun GreetingPreview() {\r\n    AppMundialTheme {\r\n        Greeting(\"Android\")\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/appmundial/MainActivity.kt b/app/src/main/java/com/appmundial/MainActivity.kt
+--- a/app/src/main/java/com/appmundial/MainActivity.kt	(revision 52d6ece22c6fb400fc2d3aefc2f30712a635d789)
++++ b/app/src/main/java/com/appmundial/MainActivity.kt	(date 1776962107247)
+@@ -11,6 +11,7 @@
+ import androidx.compose.runtime.Composable
+ import androidx.compose.ui.Modifier
+ import androidx.compose.ui.tooling.preview.Preview
++import com.appmundial.presentation.navegation.NavigationWrapper
+ import com.appmundial.ui.theme.AppMundialTheme
+ 
+ class MainActivity : ComponentActivity() {
+@@ -18,13 +19,11 @@
+         super.onCreate(savedInstanceState)
+         enableEdgeToEdge()
+         setContent {
+-            AppMundialTheme {
+-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+-                    Greeting(
+-                        name = "Android",
+-                        modifier = Modifier.padding(innerPadding)
+-                    )
+-                }
++            AppMundialTheme() { }Theme {
++                val context = LocalContext.current
++                val db = AppDatabase.getInstance(context)
++
++                NavigationWrapper(db)
+             }
+         }
+     }
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.android.application)\r\n    alias(libs.plugins.kotlin.compose)\r\n\r\n    alias(libs.plugins.jetbrains.kotlin.serialization)\r\n\r\n    alias(libs.plugins.ksp)\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.appmundial\"\r\n    compileSdk {\r\n        version = release(36) {\r\n            minorApiLevel = 1\r\n        }\r\n    }\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.appmundial\"\r\n        minSdk = 30\r\n        targetSdk = 36\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_11\r\n        targetCompatibility = JavaVersion.VERSION_11\r\n    }\r\n    buildFeatures {\r\n        compose = true\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation(libs.androidx.core.ktx)\r\n    implementation(libs.androidx.lifecycle.runtime.ktx)\r\n    implementation(libs.androidx.activity.compose)\r\n    implementation(platform(libs.androidx.compose.bom))\r\n    implementation(libs.androidx.compose.ui)\r\n    implementation(libs.androidx.compose.ui.graphics)\r\n    implementation(libs.androidx.compose.ui.tooling.preview)\r\n    implementation(libs.androidx.compose.material3)\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.androidx.junit)\r\n    androidTestImplementation(libs.androidx.espresso.core)\r\n    androidTestImplementation(platform(libs.androidx.compose.bom))\r\n    androidTestImplementation(libs.androidx.compose.ui.test.junit4)\r\n    debugImplementation(libs.androidx.compose.ui.tooling)\r\n    debugImplementation(libs.androidx.compose.ui.test.manifest)\r\n\r\n    //Librerias de nav3\r\n    implementation(libs.androidx.navigation3.ui)\r\n    implementation(libs.androidx.navigation3.runtime)\r\n    implementation(libs.kotlinx.serialization.core)\r\n\r\n    //Librerias de room y viewmodel\r\n    implementation(libs.androidx.room.runtime)\r\n    implementation(libs.androidx.room.ktx)\r\n    ksp(libs.androidx.room.compiler)\r\n\r\n    implementation(libs.androidx.lifecycle.viewmodel.compose)\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	(revision 52d6ece22c6fb400fc2d3aefc2f30712a635d789)
++++ b/app/build.gradle.kts	(date 1776961613109)
+@@ -52,6 +52,7 @@
+     implementation(libs.androidx.compose.ui.graphics)
+     implementation(libs.androidx.compose.ui.tooling.preview)
+     implementation(libs.androidx.compose.material3)
++    implementation(libs.androidx.runtime)
+     testImplementation(libs.junit)
+     androidTestImplementation(libs.androidx.junit)
+     androidTestImplementation(libs.androidx.espresso.core)

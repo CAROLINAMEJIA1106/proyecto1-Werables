@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.appmundial.presentation.navegation.NavigationWrapper
 import com.appmundial.ui.theme.AppMundialTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,13 +19,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppMundialTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            AppMundialTheme() { }Theme {
+                val context = LocalContext.current
+                val db = AppDatabase.getInstance(context)
+
+                NavigationWrapper(db)
             }
         }
     }
