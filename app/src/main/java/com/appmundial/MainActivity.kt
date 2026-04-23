@@ -10,7 +10,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.appmundial.domain.data.local.database.AppDatabase
 import com.appmundial.presentation.navegation.NavigationWrapper
 import com.appmundial.ui.theme.AppMundialTheme
 
@@ -19,28 +21,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppMundialTheme() { }Theme {
+            AppMundialTheme {
                 val context = LocalContext.current
                 val db = AppDatabase.getInstance(context)
 
                 NavigationWrapper(db)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AppMundialTheme {
-        Greeting("Android")
     }
 }
