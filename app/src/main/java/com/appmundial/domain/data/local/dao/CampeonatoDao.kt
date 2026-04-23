@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.appmundial.domain.data.local.entity.CampeonatoEntity
 
-
+/*Clase para manejar los datos de los equipos campeones*/
 @Dao
 interface CampeonatoDao {
 
