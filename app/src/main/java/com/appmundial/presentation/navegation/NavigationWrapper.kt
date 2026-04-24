@@ -1,38 +1,82 @@
-package com.appmundial.presentation.navegation
+package com.appmundial.presentation.navigation
 
+import android.app.Activity
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.appmundial.domain.data.local.database.AppDatabase
+import com.appmundial.presentation.screens.home.InicioScreen
+import com.appmundial.presentation.screens.detalle.DetallePaisScreen
+import com.appmundial.presentation.screens.detalle.DetallePaisViewModel
 
-
+/**
+ * Composable encargado de gestionar la navegación de la aplicación utilizando Navigation 3.
+ *
+ * Controla el flujo entre:
+ * - Inicio
+ * - Detalle de país
+ *
+ * Inyecta la base de datos en los ViewModel siguiendo MVVM.
+ */
 @Composable
 fun NavigationWrapper(db: AppDatabase) {
 
-    val backStack = rememberNavBackStack<Routes>(Routes.Inicio)
+    val backStack = rememberNavBackStack(Routes.Inicio)
 
     NavDisplay(
         backStack = backStack,
         onBack = { backStack.removeLastOrNull() },
+
         entryProvider = entryProvider {
 
-            // LISTA PAISES
-            entry<Routes.Lista> {
+            //  INICIO
+            entry<Routes.Inicio> {
 
-                val vm = viewModel<ListPaisesViewModel> {
-                    ListPaisesViewModel(db.paisGanadorDao())
+                val context = LocalContext.current
+                val activity = context as? Activity
+
+                InicioScreen(
+                    onIngresar = {
+                        // 🔥 temporal: país 1 (luego vendrá desde lista)
+                        backStack.add(Routes.Detalle(1))
+                    },
+                    onSalir = {
+                        activity?.finish()
+                    }
+                )
+            }
+
+            //  DETALLE PAÍS
+            entry<Routes.Detalle> { route ->
+
+                val detalleViewModel = viewModel<DetallePaisViewModel> {
+                    DetallePaisViewModel(
+                        db.campeonatoDao(),
+                        db.paisGanadorDao()
+                    )
                 }
 
-                ListaPaisesScreen(
-                    viewModel = vm,
-                    onPaisClick = { id ->
-                        backStack.add(Routes.Detalle(id))
+                DetallePaisScreen(
+                    viewModel = detalleViewModel,
+                    paisId = route.paisId,
+                    onAnioClick = {
+                        // pendiente (pantalla integrantes)
                     },
                     onInicio = { backStack.add(Routes.Inicio) },
                     onBack = { backStack.removeLastOrNull() }
                 )
             }
+
+            /*
+            🔵 FUTURO (cuando integren)
+
+            entry<Routes.Lista> { ... }
+
+            entry<Routes.Integrantes> { ... }
+            */
         }
     )
 }

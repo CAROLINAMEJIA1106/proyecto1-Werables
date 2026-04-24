@@ -25,5 +25,5 @@ data class PaisGanadorEntity (
 
     val pa_bandera: ByteArray?,   // BLOB
 
-    val pa_anios: String
+    val pa_anios: String?
 )

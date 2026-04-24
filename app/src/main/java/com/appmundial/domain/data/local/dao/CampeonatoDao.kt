@@ -4,7 +4,14 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.appmundial.domain.data.local.entity.CampeonatoEntity
 
-/*Clase para manejar los datos de los equipos campeones*/
+/**
+ * DAO para la entidad Campeonato.
+ *
+ * Permite obtener los campeonatos asociados a un país específico,
+ * facilitando la consulta de los años en los que un país fue campeón.
+ *
+ * Se utiliza principalmente en la pantalla de detalle del país.
+ */
 @Dao
 interface CampeonatoDao {
 

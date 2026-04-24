@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.appmundial.domain.data.local.database.AppDatabase
-import com.appmundial.presentation.navegation.NavigationWrapper
+import com.appmundial.presentation.navigation.NavigationWrapper
 import com.appmundial.ui.theme.AppMundialTheme
 
 class MainActivity : ComponentActivity() {
