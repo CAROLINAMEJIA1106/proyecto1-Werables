@@ -4,11 +4,10 @@
  * Se utiliza una sealed interface para representar cada pantalla como un tipo,
  * permitiendo navegación tipada y segura entre pantallas.
  */
-
-
 package com.appmundial.presentation.navigation
 
 import androidx.navigation3.runtime.NavKey
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 
 @Serializable

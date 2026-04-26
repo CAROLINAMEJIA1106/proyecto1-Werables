@@ -16,7 +16,7 @@ import com.appmundial.domain.data.local.entity.PaisGanadorEntity
 @Dao
 interface PaisGanadorDao {
 
-    @Query("SELECT * FROM pais_ganador ORDER BY pa_num_campeon DESC")
+    @Query("SELECT * FROM pais_ganador ORDER BY pa_id")
     suspend fun getPaises(): List<PaisGanadorEntity>
 
     @Query("SELECT * FROM pais_ganador WHERE pa_id = :id")

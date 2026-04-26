@@ -11,6 +11,8 @@ import com.appmundial.domain.data.local.database.AppDatabase
 import com.appmundial.presentation.screens.home.InicioScreen
 import com.appmundial.presentation.screens.detalle.DetallePaisScreen
 import com.appmundial.presentation.screens.detalle.DetallePaisViewModel
+import com.appmundial.presentation.screens.paises.ListaPaisesScreen
+import com.appmundial.presentation.screens.paises.ListaPaisesViewModel
 
 /**
  * Composable encargado de gestionar la navegación de la aplicación utilizando Navigation 3.
@@ -34,21 +36,33 @@ fun NavigationWrapper(db: AppDatabase) {
 
             //  INICIO
             entry<Routes.Inicio> {
-
                 val context = LocalContext.current
                 val activity = context as? Activity
-
                 InicioScreen(
                     onIngresar = {
                         // 🔥 temporal: país 1 (luego vendrá desde lista)
-                        backStack.add(Routes.Detalle(1))
+                        //backStack.add(Routes.Detalle(1))
+                        backStack.add(Routes.Lista)
                     },
                     onSalir = {
                         activity?.finish()
                     }
                 )
             }
-
+//Lista de paises ganadores
+            entry<Routes.Lista> { route ->
+                val ListaPaisesViewModel = viewModel<ListaPaisesViewModel> {
+                    ListaPaisesViewModel(
+                        db.paisGanadorDao()
+                    )
+                }
+                ListaPaisesScreen(
+                    viewModel = ListaPaisesViewModel,
+                    onItemClick= {},
+                    onInicio = { backStack.add(Routes.Inicio) },
+                    onBack = { backStack.removeLastOrNull() }
+                )
+            }
             //  DETALLE PAÍS
             entry<Routes.Detalle> { route ->
 

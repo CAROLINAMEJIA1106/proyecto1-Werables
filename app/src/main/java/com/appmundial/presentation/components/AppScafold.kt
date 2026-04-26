@@ -1,5 +1,5 @@
 package com.appmundial.presentation.components
-
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,16 +14,14 @@ import androidx.compose.material3.TopAppBarDefaults.centerAlignedTopAppBarColors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
-
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScaffold(
     title: String,
     onBackClick: (() -> Unit)? = null,
     onHomeClick: (() -> Unit)? = null,
-    content: @Composable (Modifier) -> Unit
+    //content: @Composable (Modifier) -> UnitA
+    content: @Composable (PaddingValues) -> Unit
 ) {
 
     Scaffold(
@@ -74,11 +72,11 @@ fun AppScaffold(
         }
 
     ) { innerPadding ->
-
-        content(
+        content(innerPadding)
+       /* content(
             Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-        )
+        )*/
     }
 }
