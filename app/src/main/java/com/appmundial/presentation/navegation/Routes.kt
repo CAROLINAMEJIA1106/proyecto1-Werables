@@ -34,5 +34,5 @@ sealed interface Routes : NavKey {
      * Recibe el id del campeonato.
      */
     @Serializable
-    data class Integrantes(val campeonatoId: Int) : Routes
+    data class Integrantes(val campeonatoId: Int  , val title: String) : Routes
 }

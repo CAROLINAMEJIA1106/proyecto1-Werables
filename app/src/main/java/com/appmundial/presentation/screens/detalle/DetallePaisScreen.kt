@@ -1,5 +1,6 @@
 package com.appmundial.presentation.screens.detalle
 
+import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
@@ -16,7 +17,7 @@ import com.appmundial.presentation.components.AppScaffold
 fun DetallePaisScreen(
     viewModel: DetallePaisViewModel,
     paisId: Int,
-    onAnioClick: (Int) -> Unit,
+    onAnioClick: (Int, Int) -> Unit,
     onInicio: () -> Unit,
     onBack: () -> Unit
 ) {
@@ -42,11 +43,11 @@ fun DetallePaisScreen(
         ) {
 
             items(campeonatos) { campeonato ->
-
+                //Log.d("DEBUG", "ID: $campeonato")
                 CampeonatoItem(
                     campeonato = campeonato,
                     onClick = {
-                        onAnioClick(campeonato.ca_id)
+                        onAnioClick(campeonato.ca_id, campeonato.ca_anio)
                     }
                 )
             }

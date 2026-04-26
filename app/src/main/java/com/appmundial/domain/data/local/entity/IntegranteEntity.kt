@@ -42,5 +42,6 @@ data class IntegranteEntity(
 
     @ColumnInfo(name = "int_es_jug")
     val int_es_jug: Int?   // 🔥 nullable (porque BD lo permite)
-)
+) {
+}
 
