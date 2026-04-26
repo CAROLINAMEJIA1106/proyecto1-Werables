@@ -4,15 +4,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.appmundial.domain.data.local.entity.IntegranteEntity
 
-/**
- * DAO para la entidad Integrante.
- *
- * Proporciona métodos para consultar los integrantes de un equipo
- * en un campeonato específico.
- *
- * Permite obtener tanto la lista completa de integrantes como filtrar
- * únicamente los jugadores mediante consultas específicas.
- */
 @Dao
 interface IntegranteDao {
 
