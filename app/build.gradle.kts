@@ -54,11 +54,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.runtime)
-<<<<<<< HEAD
-    implementation(libs.androidx.compose.foundation.layout)
-=======
     implementation(libs.androidx.material3)
->>>>>>> ff33ca0cc910b5bfc634846761a9d5c438578a9c
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -78,5 +74,6 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
     implementation("io.coil-kt:coil-compose:2.7.0")
 }

@@ -1,0 +1,74 @@
+Index: app/src/main/java/com/appmundial/presentation/screens/detalle/DetallePaisScreen.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.appmundial.presentation.screens.detalle\r\n\r\nimport androidx.compose.foundation.lazy.LazyColumn\r\nimport androidx.compose.foundation.lazy.items\r\nimport androidx.compose.runtime.*\r\nimport com.appmundial.presentation.components.CampeonatoItem\r\nimport com.appmundial.presentation.components.AppScaffold\r\n\r\n/**\r\n * Pantalla que muestra el detalle de un país:\r\n * - Nombre del país\r\n * - Lista de campeonatos ganados\r\n * - Navegación hacia integrantes\r\n */\r\n@Composable\r\nfun DetallePaisScreen(\r\n    viewModel: DetallePaisViewModel,\r\n    paisId: Int,\r\n    onAnioClick: (Int) -> Unit,\r\n    onInicio: () -> Unit,\r\n    onBack: () -> Unit\r\n) {\r\n\r\n    //  Estados desde el ViewModel\r\n    val campeonatos by viewModel.campeonatos.collectAsState()\r\n    val pais by viewModel.pais.collectAsState()\r\n\r\n    //  Cargar datos\r\n    LaunchedEffect(paisId) {\r\n        viewModel.cargarDatos(paisId)\r\n    }\r\n\r\n    //  ESTRUCTURA PRINCIPAL CON SCAFFOLD\r\n    AppScaffold(\r\n        title = pais?.pa_nombre ?: \"Detalle del país\",\r\n        onBackClick = onBack,\r\n        onHomeClick = onInicio\r\n    ) { padding ->\r\n\r\n        LazyColumn(\r\n            modifier = padding\r\n        ) {\r\n\r\n            items(campeonatos) { campeonato ->\r\n\r\n                CampeonatoItem(\r\n                    campeonato = campeonato,\r\n                    onClick = {\r\n                        onAnioClick(campeonato.ca_id)\r\n                    }\r\n                )\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/appmundial/presentation/screens/detalle/DetallePaisScreen.kt b/app/src/main/java/com/appmundial/presentation/screens/detalle/DetallePaisScreen.kt
+--- a/app/src/main/java/com/appmundial/presentation/screens/detalle/DetallePaisScreen.kt	(revision b7305632f8e7abe20c34ae0ff2b13c4ab28443e1)
++++ b/app/src/main/java/com/appmundial/presentation/screens/detalle/DetallePaisScreen.kt	(date 1777052328858)
+@@ -1,11 +1,16 @@
+ package com.appmundial.presentation.screens.detalle
+ 
++import androidx.compose.foundation.background
++import androidx.compose.foundation.layout.fillMaxSize
+ import androidx.compose.foundation.lazy.LazyColumn
+ import androidx.compose.foundation.lazy.items
++import androidx.compose.material3.MaterialTheme
+ import androidx.compose.runtime.*
++import androidx.compose.ui.Modifier
+ import com.appmundial.presentation.components.CampeonatoItem
+ import com.appmundial.presentation.components.AppScaffold
+ 
++
+ /**
+  * Pantalla que muestra el detalle de un país:
+  * - Nombre del país
+@@ -39,6 +44,8 @@
+ 
+         LazyColumn(
+             modifier = padding
++                .fillMaxSize()
++                .background(MaterialTheme.colorScheme.background)
+         ) {
+ 
+             items(campeonatos) { campeonato ->
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher_iconoappmundial\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_iconoappmundial_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.AppMundial\">\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\"\r\n            android:label=\"@string/app_name\"\r\n            android:theme=\"@style/Theme.AppMundial\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision b7305632f8e7abe20c34ae0ff2b13c4ab28443e1)
++++ b/app/src/main/AndroidManifest.xml	(date 1777220417735)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools">
+-
++    <uses-permission android:name="android.permission.INTERNET"/>
+     <application
+         android:allowBackup="true"
+         android:dataExtractionRules="@xml/data_extraction_rules"
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.android.application)\r\n    alias(libs.plugins.kotlin.compose)\r\n\r\n    alias(libs.plugins.jetbrains.kotlin.serialization)\r\n\r\n    alias(libs.plugins.ksp)\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.appmundial\"\r\n    compileSdk {\r\n        version = release(36) {\r\n            minorApiLevel = 1\r\n        }\r\n    }\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.appmundial\"\r\n        minSdk = 30\r\n        targetSdk = 36\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_11\r\n        targetCompatibility = JavaVersion.VERSION_11\r\n    }\r\n    buildFeatures {\r\n        compose = true\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation(libs.androidx.core.ktx)\r\n    implementation(libs.androidx.lifecycle.runtime.ktx)\r\n    implementation(libs.androidx.activity.compose)\r\n    implementation(platform(libs.androidx.compose.bom))\r\n    implementation(libs.androidx.compose.ui)\r\n    implementation(libs.androidx.compose.ui.graphics)\r\n    implementation(libs.androidx.compose.ui.tooling.preview)\r\n    implementation(libs.androidx.compose.material3)\r\n    implementation(libs.androidx.runtime)\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.androidx.junit)\r\n    androidTestImplementation(libs.androidx.espresso.core)\r\n    androidTestImplementation(platform(libs.androidx.compose.bom))\r\n    androidTestImplementation(libs.androidx.compose.ui.test.junit4)\r\n    debugImplementation(libs.androidx.compose.ui.tooling)\r\n    debugImplementation(libs.androidx.compose.ui.test.manifest)\r\n\r\n    //Librerias de nav3\r\n    implementation(libs.androidx.navigation3.ui)\r\n    implementation(libs.androidx.navigation3.runtime)\r\n    implementation(libs.kotlinx.serialization.core)\r\n\r\n    //Librerias de room y viewmodel\r\n    implementation(libs.androidx.room.runtime)\r\n    implementation(libs.androidx.room.ktx)\r\n    ksp(libs.androidx.room.compiler)\r\n\r\n    implementation(libs.androidx.lifecycle.viewmodel.compose)\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	(revision b7305632f8e7abe20c34ae0ff2b13c4ab28443e1)
++++ b/app/build.gradle.kts	(date 1777219377011)
+@@ -72,4 +72,7 @@
+     ksp(libs.androidx.room.compiler)
+ 
+     implementation(libs.androidx.lifecycle.viewmodel.compose)
++
++    //Librerias para imagenes desde URL
++    implementation("io.coil-kt:coil-compose:2.6.0")
+ }
+\ No newline at end of file

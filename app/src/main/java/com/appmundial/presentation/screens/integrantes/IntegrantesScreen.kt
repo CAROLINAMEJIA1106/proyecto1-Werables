@@ -1,6 +1,9 @@
 package com.appmundial.presentation.screens.integrantes
 
+import android.R.attr.padding
 import android.util.Log
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -9,6 +12,10 @@ import androidx.compose.runtime.getValue
 import com.appmundial.presentation.components.AppScaffold
 import androidx.compose.foundation.lazy.items
 import com.appmundial.presentation.components.IntegranteItem
+
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.padding
 
 @Composable
 fun IntegrantesScreen(
@@ -20,7 +27,7 @@ fun IntegrantesScreen(
 ) {
 
         // Estado del ViewModel
-        val integrantes by viewModel.integrantes.collectAsState()
+        val integrantes by viewModel.integrantes.collectAsState(initial = emptyList())
 
         // Cargar datos
         LaunchedEffect(campeonatoId) {
@@ -35,7 +42,10 @@ fun IntegrantesScreen(
         ) { modifier ->
 
                 LazyColumn(
-                        modifier = modifier
+                        modifier = Modifier
+                                .fillMaxSize()
+                                .padding(modifier),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                         items(integrantes) { integrante ->
 

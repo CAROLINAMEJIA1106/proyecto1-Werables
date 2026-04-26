@@ -13,6 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.appmundial.domain.data.local.entity.CampeonatoEntity
 
+import coil.compose.AsyncImage
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.clickable
+import androidx.compose.material3.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+
+
+
 /**
  * Componente reutilizable que muestra la información de un campeonato.
  *
@@ -36,31 +46,40 @@ fun CampeonatoItem(
             .clickable { onClick() },
 
         elevation = CardDefaults.cardElevation(6.dp),
+
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         )
     ) {
 
-        Column(
-            modifier = Modifier.padding(16.dp)
+        Row(
+            modifier = Modifier.padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            // Año
-            Text(
-                text = "⚽ Año: ${campeonato.ca_anio}",
-                style = MaterialTheme.typography.titleMedium
-            )
+            // TEXTO (IZQUIERDA)
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
 
-            campeonato.ca_goleador?.let {
-                Text(text = "👤 Goleador: $it")
+                Text(text = "🏆 Año: ${campeonato.ca_anio}")
+                Text(text = "👤 Goleador: ${campeonato.ca_goleador}")
+                Text(text = "🌍 País del goleador: ${campeonato.ca_gole_pais}")
+                Text(text = "⚽ Goles: ${campeonato.ca_gole_num_gol}")
             }
 
-            campeonato.ca_gole_pais?.let {
-                Text(text = "🌍 País: $it")
-            }
+            // IMAGEN (DERECHA)
+            campeonato.ca_gole_img?.let { url ->
 
-            campeonato.ca_gole_num_gol?.let {
-                Text(text = "🥅 Goles: $it")
+                Spacer(modifier = Modifier.width(12.dp))
+
+                AsyncImage(
+                    model = url,
+                    contentDescription = "Goleador",
+                    modifier = Modifier
+                        .size(70.dp)
+
+                )
             }
         }
     }
